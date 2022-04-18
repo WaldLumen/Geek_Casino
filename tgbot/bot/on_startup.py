@@ -4,16 +4,15 @@ from os import getenv
 
 from aiogram import types, Bot, Dispatcher
 
-from tgbot.bot.DataBase import DBQueries
+from tgbot.bot.Dwarf import Dwarf
 
-bot = Bot(getenv(str("token")))
+bot = Bot(getenv("token"))
 dp = Dispatcher(bot)
-requests = DBQueries()
+elf = Dwarf()
 
 
 async def on_startup(dp):
-    requests.the_richest()
-    requests.create_table()
+    elf.create_table()
     logging.info('bot has been launched')
 
     help_text = '-bot navigation'

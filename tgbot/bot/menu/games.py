@@ -4,7 +4,7 @@ from aiogram import types
 
 async def menu_games(call: types.CallbackQuery):
     buttons = [
-        types.InlineKeyboardButton(text="Dices", callback_data="a"),
+        types.InlineKeyboardButton(text="Dices", callback_data="dices"),
         types.InlineKeyboardButton(text="Colors", callback_data="b"),
         types.InlineKeyboardButton(text="Lottery", callback_data="c"),
         types.InlineKeyboardButton(text="Slots", callback_data="d"),

@@ -1,9 +1,9 @@
 # main menu
 from aiogram import types
 
-from tgbot.bot.DataBase import DBQueries
+from tgbot.bot.Dwarf import Dwarf
 
-requests = DBQueries()
+requests = Dwarf()
 
 
 async def main_menu(message: types.Message):
