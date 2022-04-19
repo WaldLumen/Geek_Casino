@@ -5,8 +5,6 @@ from aiogram import types
 
 from tgbot.bot.Dwarf import Dwarf
 
-elf = Dwarf()
-
 
 async def start_cubes(call: types.CallbackQuery):
     keyboard = types.InlineKeyboardMarkup()
@@ -16,13 +14,15 @@ async def start_cubes(call: types.CallbackQuery):
 
 
 async def throw(call: types.CallbackQuery):
+    elf = Dwarf()
+
     user_id = call.from_user.id
     cash = elf.dices(user_id)
 
     keyboard = types.InlineKeyboardMarkup()
 
-    keyboard.add(types.InlineKeyboardButton(text=" ⬅ Menu ⬅", callback_data="to_menu"),
-                 types.InlineKeyboardButton(text="Play Again", callback_data="dices"))
+    keyboard.add(types.InlineKeyboardButton(text=" ⬅Menu⬅", callback_data="to_menu"),
+                 types.InlineKeyboardButton(text="🔄Play Again🔄", callback_data="dices"))
 
     if cash > 300:
         await call.message.edit_text("Throwing Dices:")

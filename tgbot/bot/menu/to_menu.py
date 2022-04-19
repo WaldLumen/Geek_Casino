@@ -4,9 +4,9 @@ from aiogram import types
 async def to_main_menu(call: types.CallbackQuery):
     # main menu
     keyboard = types.InlineKeyboardMarkup(row_width=2)
-    keyboard.add(types.InlineKeyboardButton(text="Profile", callback_data="profile"),
-                 types.InlineKeyboardButton(text="Start Game", callback_data="games"),
-                 types.InlineKeyboardButton(text="Top", callback_data="f"))
+    keyboard.add(types.InlineKeyboardButton(text="👤Profile👤", callback_data="profile"),
+                 types.InlineKeyboardButton(text="⭐Start Game⭐", callback_data="games"),
+                 types.InlineKeyboardButton(text="🔝Top🔝", callback_data="f"))
 
     await call.message.edit_text("Hello from Sylvia", reply_markup=keyboard)
 

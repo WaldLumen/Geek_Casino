@@ -33,6 +33,7 @@ class Dwarf:
                 return cur.fetchone()
 
     def register_user(self, user_id):
+
         with self.pool.connection() as conn:
             with conn.cursor() as cur:
                 cur.execute("SELECT id FROM users WHERE ID = %s" % user_id)
@@ -44,7 +45,7 @@ class Dwarf:
                 else:
                     pass
 
-    def replenishment(self, ball, user_id):
+    def replenishment(self, ball: int, user_id: int):
         with self.pool.connection() as conn:
             with conn.cursor() as cur:
                 cur.execute("SELECT id FROM users WHERE id = %s" % user_id)
@@ -52,7 +53,7 @@ class Dwarf:
                     "Update users set cash = cash + %s WHERE id = %s" % (ball, user_id)
                 )
 
-    def cash_withdrawal(self, ball, user_id):
+    def cash_withdrawal(self, ball: int, user_id: int):
         with self.pool.connection() as conn:
             with conn.cursor() as cur:
                 cur.execute("SELECT id FROM users WHERE id = %s" % user_id)
