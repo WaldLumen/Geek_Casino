@@ -8,14 +8,14 @@ from tgbot.bot.Dwarf import Dwarf
 
 color_factory = CallbackData("cl", "color")
 
-colors = ['White', 'Black', 'Gray']
+colors = ['White', 'Black', 'Gray', 'Red']
 
 
-async def start_game(call: types.CallbackQuery):
+async def start_game_big(call: types.CallbackQuery):
     keyboard = types.InlineKeyboardMarkup()
     for color in colors:
         keyboard.add(types.InlineKeyboardButton(text=color, callback_data=color_factory.new(color=color)))
-    keyboard.add(types.InlineKeyboardButton(text=" ⬅ Menu ⬅", callback_data="to_menu"))
+    keyboard.add(types.InlineKeyboardButton(text=" ⬅ Menu ⬅", callback_data="colors_menu"))
 
     await call.message.edit_text("Choice Color: ", reply_markup=keyboard)
 
@@ -34,6 +34,11 @@ async def colorr(call: types.CallbackQuery, callback_data: dict):
     user_id = call.from_user.id
     cash = elf.dices(user_id)
 
+    keyboard = types.InlineKeyboardMarkup()
+
+    keyboard.add(types.InlineKeyboardButton(text=" ⬅Menu⬅", callback_data="games"),
+                 types.InlineKeyboardButton(text="🔄Play Again🔄", callback_data="dices"))
+
     if cash > 300:
         await call.message.edit_text("Choice Color: ")
         color = callback_data.get('color')
@@ -43,12 +48,12 @@ async def colorr(call: types.CallbackQuery, callback_data: dict):
 
         if color == true_color:
             await call.message.answer(f"You Win;\n"
-                                      f"300₪ was credited to your balance", reply_markup=keyboard3)
-            elf.replenishment(ball=300, user_id=user_id)
+                                      f"400₪ was credited to your balance", reply_markup=keyboard)
+            elf.replenishment(ball=400, user_id=user_id)
         else:
             await call.message.answer(f"You Lose;\n"
-                                      f"300₪ was deducted from your account", reply_markup=keyboard3)
-            elf.cash_withdrawal(ball=300, user_id=user_id)
+                                      f"100₪ was deducted from your account", reply_markup=keyboard)
+            elf.cash_withdrawal(ball=100, user_id=user_id)
     else:
         keyboard = types.InlineKeyboardMarkup()
         keyboard.add(types.InlineKeyboardButton(text=" ⬅ Menu ⬅", callback_data="to_menu"))

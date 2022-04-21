@@ -9,7 +9,7 @@ from tgbot.bot.Dwarf import Dwarf
 async def start_cubes(call: types.CallbackQuery):
     keyboard = types.InlineKeyboardMarkup()
     keyboard.add(types.InlineKeyboardButton(text="Throw", callback_data="throw"))
-    keyboard.add(types.InlineKeyboardButton(text=" ⬅ Menu ⬅", callback_data="to_menu"))
+    keyboard.add(types.InlineKeyboardButton(text=" ⬅ Menu ⬅", callback_data="games"))
     await call.message.edit_text("Throw Dices:", reply_markup=keyboard)
 
 
@@ -21,7 +21,7 @@ async def throw(call: types.CallbackQuery):
 
     keyboard = types.InlineKeyboardMarkup()
 
-    keyboard.add(types.InlineKeyboardButton(text=" ⬅Menu⬅", callback_data="to_menu"),
+    keyboard.add(types.InlineKeyboardButton(text=" ⬅Menu⬅", callback_data="games"),
                  types.InlineKeyboardButton(text="🔄Play Again🔄", callback_data="dices"))
 
     if cash > 300:
