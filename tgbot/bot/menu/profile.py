@@ -2,11 +2,11 @@
 
 from aiogram import types
 
-from tgbot.bot.Dwarf import Dwarf
+from tgbot.bot.Banque import Banque
 
 
 async def profile(call: types.CallbackQuery):
-    elf = Dwarf()
+    elf = Banque()
 
     keyboard = types.InlineKeyboardMarkup()
     keyboard.add(types.InlineKeyboardButton(text=" ⬅ Menu ⬅", callback_data="to_menu"))

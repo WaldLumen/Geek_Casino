@@ -4,17 +4,15 @@ from os import getenv
 
 from aiogram import types, Bot, Dispatcher
 
-from tgbot.bot.Dwarf import Dwarf
+from tgbot.bot.Banque import Banque
 
 bot = Bot(getenv("token"))
 dp = Dispatcher(bot)
-elf = Dwarf()
+database = Banque()
 
 
 async def on_startup(dp):
-    elf.create_table()
-    logging.info('bot has been launched')
-
+    database.create_table()
     help_text = '-bot navigation'
     start_text = '-start/reboot bot'
     commands = [

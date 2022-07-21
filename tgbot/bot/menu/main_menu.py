@@ -1,12 +1,12 @@
 # main menu
 from aiogram import types
 
-from tgbot.bot.Dwarf import Dwarf
+from tgbot.bot.Banque import Banque
 
 
 async def main_menu(message: types.Message):
     # main menu
-    elf = Dwarf()
+    elf = Banque()
     user_id = message.from_user.id
     keyboard = types.InlineKeyboardMarkup(row_width=2)
     keyboard.add(types.InlineKeyboardButton(text="👤Profile👤", callback_data="profile"),
