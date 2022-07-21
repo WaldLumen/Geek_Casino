@@ -4,7 +4,7 @@ from asyncio import sleep
 from aiogram import types
 from aiogram.utils.callback_data import CallbackData
 
-from tgbot.bot.Dwarf import Dwarf
+from tgbot.bot.Banque import Banque
 
 color_factory = CallbackData("cl", "color")
 
@@ -29,31 +29,36 @@ async def send_random_words(call: types.CallbackQuery):
 
 #
 async def colorr(call: types.CallbackQuery, callback_data: dict):
-    elf = Dwarf()
+    bank = Banque()
 
     user_id = call.from_user.id
-    cash = elf.dices(user_id)
 
     keyboard = types.InlineKeyboardMarkup()
 
     keyboard.add(types.InlineKeyboardButton(text=" ⬅Menu⬅", callback_data="games"),
-                 types.InlineKeyboardButton(text="🔄Play Again🔄", callback_data="dices"))
+                 types.InlineKeyboardButton(text="🔄Play Again🔄", callback_data="giant"))
+
+    bank.start_transaction()
+    bank.select_cash_for_update(user_id)
+    cash = bank.show_cash(user_id)
 
     if cash > 300:
         await call.message.edit_text("Choice Color: ")
         color = callback_data.get('color')
         true_color = random.choice(colors)
 
-        await sleep(4)
+        await sleep(2)
 
         if color == true_color:
             await call.message.answer(f"You Win;\n"
-                                      f"500₪ was credited to your balance", reply_markup=keyboard)
-            elf.replenishment(ball=500, user_id=user_id)
+                                      f"1000₪ was credited to your balance", reply_markup=keyboard)
+            bank.replenishment(ball=1000, user_id=user_id)
         else:
             await call.message.answer(f"You Lose;\n"
-                                      f"100₪ was deducted from your account", reply_markup=keyboard)
-            elf.cash_withdrawal(ball=100, user_id=user_id)
+                                      f"500₪ was deducted from your account", reply_markup=keyboard)
+            bank.cash_withdrawal(ball=500, user_id=user_id)
+        bank.commit_transaction()
+
     else:
         keyboard = types.InlineKeyboardMarkup()
         keyboard.add(types.InlineKeyboardButton(text=" ⬅ Menu ⬅", callback_data="to_menu"))

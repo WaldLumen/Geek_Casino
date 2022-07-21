@@ -3,7 +3,13 @@ from asyncio import sleep
 
 from aiogram import types
 
-from tgbot.bot.Dwarf import Dwarf
+import logging
+
+from tgbot.bot.Banque import Banque
+
+logging.getLogger("psycopg").setLevel(logging.DEBUG)
+
+bank = Banque()
 
 
 async def start_cubes(call: types.CallbackQuery):
@@ -11,18 +17,20 @@ async def start_cubes(call: types.CallbackQuery):
     keyboard.add(types.InlineKeyboardButton(text="Throw", callback_data="throw"))
     keyboard.add(types.InlineKeyboardButton(text=" ⬅ Menu ⬅", callback_data="games"))
     await call.message.edit_text("Throw Dices:", reply_markup=keyboard)
+    # bank.drop_table()
 
 
 async def throw(call: types.CallbackQuery):
-    elf = Dwarf()
-
-    user_id = call.from_user.id
-    cash = elf.dices(user_id)
-
     keyboard = types.InlineKeyboardMarkup()
-
     keyboard.add(types.InlineKeyboardButton(text=" ⬅Menu⬅", callback_data="games"),
                  types.InlineKeyboardButton(text="🔄Play Again🔄", callback_data="dices"))
+
+    user_id = call.from_user.id
+
+    bank.start_transaction()
+    bank.select_cash_for_update(user_id)
+
+    cash = bank.show_cash(user_id)
 
     if cash > 300:
         await call.message.edit_text("Throwing Dices:")
@@ -40,13 +48,18 @@ async def throw(call: types.CallbackQuery):
         if bott.dice.value > usr.dice.value:
             await call.message.answer("You lose;\n"
                                       "300₪ was deducted from your account", reply_markup=keyboard)
-            elf.cash_withdrawal(ball=300, user_id=user_id)
+
+            bank.cash_withdrawal(300, user_id)
+
         elif bott.dice.value < usr.dice.value:
             await call.message.answer("You Win;\n"
                                       "300₪ was credited to your balance", reply_markup=keyboard)
-            elf.replenishment(ball=300, user_id=user_id)
+            bank.replenishment(300, user_id)
+
         else:
             await call.message.answer("Draw", reply_markup=keyboard)
+        bank.commit_transaction()
+
     else:
         keyboard = types.InlineKeyboardMarkup()
         keyboard.add(types.InlineKeyboardButton(text=" ⬅ Menu ⬅", callback_data="to_menu"))
