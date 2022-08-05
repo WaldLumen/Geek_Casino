@@ -6,8 +6,10 @@ async def menu_games(call: types.CallbackQuery):
     buttons = [
         types.InlineKeyboardButton(text="🎲Dices🎲", callback_data="dices"),
         types.InlineKeyboardButton(text="Colors", callback_data="colors_menu"),
-        types.InlineKeyboardButton(text="Not available now", callback_data="c"),
-        types.InlineKeyboardButton(text="Not available now", callback_data="c"),
+        # lottery game
+        types.InlineKeyboardButton(text="Not available now", callback_data="cum"),
+        # I don`t have any ideas for this game
+        types.InlineKeyboardButton(text="Not available now", callback_data="pot"),
         types.InlineKeyboardButton(text=" ⬅Menu⬅", callback_data="to_menu")
     ]
 

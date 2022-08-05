@@ -6,14 +6,14 @@ from tgbot.bot.Banque import Banque
 
 
 async def profile(call: types.CallbackQuery):
-    elf = Banque()
+    bank = Banque()
 
     keyboard = types.InlineKeyboardMarkup()
     keyboard.add(types.InlineKeyboardButton(text=" ⬅ Menu ⬅", callback_data="to_menu"))
 
-    cash = elf.profile(user_id=call.from_user.id)
+    cash = bank.show_cash(user_id=call.from_user.id)
 
-    await call.message.edit_text('id card: <b>%d</b>\n'
-                                 'Balance: <b>%s ₪</b>' % (call.from_user.id, cash[0]),
+    await call.message.edit_text('Id card: <b>%d</b>\n'
+                                 'Balance: <b>%s ₪</b>' % (call.from_user.id, cash),
                                  reply_markup=keyboard,
                                  parse_mode='HTML')

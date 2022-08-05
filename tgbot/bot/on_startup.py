@@ -13,10 +13,10 @@ database = Banque()
 
 async def on_startup(dp):
     database.create_table()
-    help_text = '-bot navigation'
-    start_text = '-start/reboot bot'
+
     commands = [
-        types.BotCommand(command="start", description=start_text),
-        types.BotCommand(command="help", description=help_text)
+        types.BotCommand(command="start", description='-bot navigation'),
+        types.BotCommand(command="help", description='-start/reboot bot')
     ]
+
     await bot.set_my_commands(commands)
