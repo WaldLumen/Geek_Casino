@@ -8,7 +8,8 @@ async def to_main_menu(call: types.CallbackQuery):
                  types.InlineKeyboardButton(text="⭐Start Game⭐", callback_data="games"),
                  types.InlineKeyboardButton(text="🔝Top🔝", callback_data="f"))
 
-    await call.message.edit_text("Hello from Sylvia", reply_markup=keyboard)
+    await call.message.edit_text("Welcome. This is main menu of this bot,"
+                                 "here you can check your profile or start playing.", reply_markup=keyboard)
 
 
 async def to_help_menu(call: types.CallbackQuery):
