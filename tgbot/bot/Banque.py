@@ -20,12 +20,13 @@ class Banque:
 
     def register_user(self, user_id):
         with self.pool.connection() as conn:
-            conn.execute("SELECT id FROM users WHERE ID = %s" % user_id)
-            if conn.fetchone() is None:
-                conn.execute(
-                    "INSERT INTO users (id, cash) VALUES (%s, %s)",
-                    (user_id, 1000))
-                conn.commit()
+            with conn.cursor() as cur:
+                cur.execute("SELECT id FROM users WHERE ID = %s" % user_id)
+                if cur.fetchone() is None:
+                    cur.execute(
+                        "INSERT INTO users (id, cash) VALUES (%s, %s)",
+                        (user_id, 1000))
+                    conn.commit()
 
     def drop_table(self):
         with self.pool.connection() as conn:
@@ -33,8 +34,9 @@ class Banque:
 
     def show_cash(self, user_id) -> int:
         with self.pool.connection() as conn:
-            conn.execute("SELECT cash FROM users WHERE id = %s" % user_id)
-            return conn.fetchone()[0]
+            with conn.cursor() as cur:
+                cur.execute("SELECT cash FROM users WHERE id = %s" % user_id)
+                return cur.fetchone()[0]
 
     def replenishment(self, ball: int, user_id: int):
         with self.pool.connection() as conn:
