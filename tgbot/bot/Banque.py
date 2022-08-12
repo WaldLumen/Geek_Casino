@@ -17,7 +17,6 @@ class Banque:
 
             conn.execute(request)
             conn.commit()
-            conn.close()
 
     def register_user(self, user_id):
         with self.pool.connection() as conn:
