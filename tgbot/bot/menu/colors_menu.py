@@ -1,12 +1,14 @@
 from aiogram import types
 
 
-async def color_menu(call: types.CallbackQuery):
+async def colors_menu(call: types.CallbackQuery):
+    buttons = [
+        types.InlineKeyboardButton(text="Duo(2)", callback_data="duo"),
+        types.InlineKeyboardButton(text="Classic(3)", callback_data="classic"),
+        types.InlineKeyboardButton(text="Big(4)", callback_data="big"),
+        types.InlineKeyboardButton(text="Giant(5)", callback_data="giant"),
+        types.InlineKeyboardButton(text=" ⬅Menu⬅", callback_data="games")
+    ]
     keyboard = types.InlineKeyboardMarkup(row_width=1)
-
-    colors_menu = ["Duo(2)", "Classic(3)", "Big(4)", "Giant(5)", "⬅Menu⬅"]
-
-    for color in colors_menu:
-        keyboard.add(types.InlineKeyboardButton(text=color, callback_data=color))
-
+    keyboard.add(*buttons)
     await call.message.edit_text("Choice your game mode", reply_markup=keyboard)
