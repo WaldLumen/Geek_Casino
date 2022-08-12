@@ -9,11 +9,12 @@ async def profile(call: types.CallbackQuery):
     bank = Banque()
 
     keyboard = types.InlineKeyboardMarkup()
-    keyboard.add(types.InlineKeyboardButton(text=" ⬅ Menu ⬅", callback_data="to_menu"))
+    keyboard.add(types.InlineKeyboardButton(text="⬅ Menu ⬅", callback_data="to_menu"))
 
-    cash = bank.show_cash(user_id=call.from_user.id)
+    cash = bank.show_cash(call.from_user.id)
 
-    await call.message.edit_text('Id card: <b>%d</b>\n'
-                                 'Balance: <b>%s ₪</b>' % (call.from_user.id, cash),
+    await call.message.edit_text('<b>Id</b>: %d\n'
+                                 '<b>Balance</b>: %s ₪' % (call.from_user.id, cash),
+
                                  reply_markup=keyboard,
                                  parse_mode='HTML')
