@@ -7,12 +7,8 @@ from menu.main_menu import main_menu
 from on_startup import on_startup
 
 from tgbot.bot.menu.colors_menu import color_menu
-from tgbot.bot.games.colors.classic import send_random_words, colorr, color_factory, start_game_classic
-from tgbot.bot.games.colors.duo import send_random_words, colorr, color_factory, start_game_duo
-from tgbot.bot.games.colors.giant import send_random_words, colorr, color_factory, start_game_giant
-from tgbot.bot.games.colors.big import send_random_words, colorr, color_factory, start_game_big
 
-from tgbot.bot.games.dices.dices import start_cubes, throw
+from tgbot.bot.games.dices.dices import start_cubes, throw_dice
 
 from tgbot.bot.menu.games import menu_games
 from tgbot.bot.menu.help import help_menu, games_base_information
@@ -43,26 +39,26 @@ def to_menu():
 
 def dices():
     dp.register_callback_query_handler(start_cubes, text="dices")
-    dp.register_callback_query_handler(throw, text="throw")
+    dp.register_callback_query_handler(throw_dice, text="throw")
 
 
-def colors():
-    dp.register_callback_query_handler(color_menu, text='colors_menu')
-
-    dp.register_callback_query_handler(start_game_big, text='big')
-    dp.register_callback_query_handler(start_game_classic, text='classic')
-    dp.register_callback_query_handler(start_game_duo, text='duo')
-    dp.register_callback_query_handler(start_game_giant, text='giant')
-
-    dp.register_callback_query_handler(send_random_words, text='random_value')
-    dp.register_callback_query_handler(colorr, color_factory.filter())
+# def colors():
+#     dp.register_callback_query_handler(color_menu, text='colors_menu')
+#
+#     dp.register_callback_query_handler(start_game_big, text='big')
+#     dp.register_callback_query_handler(start_game_classic, text='classic')
+#     dp.register_callback_query_handler(start_game_duo, text='duo')
+#     dp.register_callback_query_handler(start_game_giant, text='giant')
+#
+#     dp.register_callback_query_handler(send_random_words, text='random_value')
+#     dp.register_callback_query_handler(colorr, color_factory.filter())
 
 
 reg_main_commands()
 help_commands()
 to_menu()
 dices()
-colors()
+# colors()
 
 if __name__ == '__main__':
     executor.start_polling(dp, skip_updates=True, on_startup=on_startup)

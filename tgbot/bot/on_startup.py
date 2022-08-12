@@ -1,4 +1,5 @@
 # reg commands for fast access
+# creating database
 import logging
 from os import getenv
 

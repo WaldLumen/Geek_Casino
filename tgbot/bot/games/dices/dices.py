@@ -17,10 +17,9 @@ async def start_cubes(call: types.CallbackQuery):
     keyboard.add(types.InlineKeyboardButton(text="Throw", callback_data="throw"))
     keyboard.add(types.InlineKeyboardButton(text=" ⬅ Menu ⬅", callback_data="games"))
     await call.message.edit_text("Throw Dices:", reply_markup=keyboard)
-    # bank.drop_table()
 
 
-async def throw(call: types.CallbackQuery):
+async def throw_dice(call: types.CallbackQuery):
     keyboard = types.InlineKeyboardMarkup()
     keyboard.add(types.InlineKeyboardButton(text=" ⬅Menu⬅", callback_data="games"),
                  types.InlineKeyboardButton(text="🔄Play Again🔄", callback_data="dices"))
@@ -32,7 +31,12 @@ async def throw(call: types.CallbackQuery):
 
     cash = bank.show_cash(user_id)
 
-    if cash > 300:
+    if cash < 300:
+        keyboard = types.InlineKeyboardMarkup()
+        keyboard.add(types.InlineKeyboardButton(text=" ⬅ Menu ⬅", callback_data="to_menu"))
+        await call.message.edit_text("There are not enough shekels on your account", reply_markup=keyboard)
+
+    else:
         await call.message.edit_text("Throwing Dices:")
 
         await call.message.answer("You:")
@@ -58,9 +62,5 @@ async def throw(call: types.CallbackQuery):
 
         else:
             await call.message.answer("Draw", reply_markup=keyboard)
-        bank.commit_transaction()
+            bank.commit_transaction()
 
-    else:
-        keyboard = types.InlineKeyboardMarkup()
-        keyboard.add(types.InlineKeyboardButton(text=" ⬅ Menu ⬅", callback_data="to_menu"))
-        await call.message.edit_text("There are not enough shekels on your account", reply_markup=keyboard)
