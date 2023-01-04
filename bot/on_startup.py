@@ -1,18 +1,11 @@
-# reg commands for fast access
-# creating database
-import logging
-from os import getenv
-
-from aiogram import types, Bot, Dispatcher
+from aiogram import types
 
 from bot.Banque import Banque
 
-bot = Bot(getenv("token"))
-dp = Dispatcher(bot)
 database = Banque()
 
 
-async def on_startup(dp):
+async def on_startup(bot):
     database.create_table()
 
     commands = [

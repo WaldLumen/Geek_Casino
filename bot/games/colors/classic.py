@@ -11,13 +11,13 @@ color_factory_classic = CallbackData("cl_classic", "color_classic")
 colors = ['White', 'Black', 'Red']
 
 
-async def start_game_classic(call: types.CallbackQuery):
+async def start_game_classic(edit_message: types.CallbackQuery.message.edit_text):
     keyboard = types.InlineKeyboardMarkup()
     for color in colors:
         keyboard.add(types.InlineKeyboardButton(text=color, callback_data=color_factory_classic.new(color_classic=color)))
     keyboard.add(types.InlineKeyboardButton(text=" ⬅ Menu ⬅", callback_data="colors_menu"))
 
-    await call.message.edit_text("Choice Color: ", reply_markup=keyboard)
+    await edit_message("Choice Color: ", reply_markup=keyboard)
 
 
 async def send_random_words_classic(call: types.CallbackQuery):

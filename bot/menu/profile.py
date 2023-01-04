@@ -1,15 +1,14 @@
-# profile
+from aiogram.types import CallbackQuery, InlineKeyboardButton, InlineKeyboardMarkup
 
-from aiogram import types
 
 from bot.Banque import Banque
 
 
-async def profile(call: types.CallbackQuery):
+async def profile(call: CallbackQuery):
     bank = Banque()
 
-    keyboard = types.InlineKeyboardMarkup()
-    keyboard.add(types.InlineKeyboardButton(text="⬅ Menu ⬅", callback_data="to_menu"))
+    keyboard = InlineKeyboardMarkup()
+    keyboard.add(InlineKeyboardButton(text="⬅ Menu ⬅", callback_data="to_menu"))
 
     cash = bank.show_cash(call.from_user.id)
 
