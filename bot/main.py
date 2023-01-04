@@ -5,21 +5,21 @@ from aiogram import Bot, Dispatcher, executor
 
 from menu.main_menu import main_menu
 from on_startup import on_startup
-from tgbot.bot.games.colors.big import start_game_big, send_random_words_big, colorr_big, color_factory_big
+from games.colors.big import start_game_big, send_random_words_big, colorr_big, color_factory_big
 
-from tgbot.bot.games.colors.classic \
+from games.colors.classic \
     import start_game_classic, color_factory_classic, colorr_classic, send_random_words_classic
-from tgbot.bot.games.colors.duo import start_game_duo, colorr_duo, send_random_words_duo, color_factory_duo
-from tgbot.bot.games.colors.giant import send_random_words_giant, colorr_giant, color_factory_giant, start_game_giant
+from games.colors.duo import start_game_duo, colorr_duo, send_random_words_duo, color_factory_duo
+from games.colors.giant import send_random_words_giant, colorr_giant, color_factory_giant, start_game_giant
 
-from tgbot.bot.menu.colors_menu import colors_menu
+from menu.colors_menu import colors_menu
 
-from tgbot.bot.games.dices.dices import start_cubes, throw_dice
+from games.dices.dices import start_cubes, throw_dice
 
-from tgbot.bot.menu.games import menu_games
-from tgbot.bot.menu.help import help_menu, games_base_information
-from tgbot.bot.menu.profile import profile
-from tgbot.bot.menu.to_menu import to_main_menu, to_help_menu
+from menu.games import menu_games
+from menu.help import help_menu, games_base_information
+from menu.profile import profile
+from menu.to_menu import to_main_menu, to_help_menu
 
 bot = Bot(getenv(str("token")))
 dp = Dispatcher(bot)

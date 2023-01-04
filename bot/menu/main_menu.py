@@ -1,6 +1,6 @@
 from aiogram import types
 
-from tgbot.bot.Banque import Banque
+from bot.Banque import Banque
 
 
 async def main_menu(message: types.Message):

@@ -5,7 +5,7 @@ from aiogram import types
 
 import logging
 
-from tgbot.bot.Banque import Banque
+from bot.Banque import Banque
 
 logging.getLogger("psycopg").setLevel(logging.DEBUG)
 

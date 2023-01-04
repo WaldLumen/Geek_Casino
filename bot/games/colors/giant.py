@@ -4,7 +4,7 @@ from asyncio import sleep
 from aiogram import types
 from aiogram.utils.callback_data import CallbackData
 
-from tgbot.bot.Banque import Banque
+from bot.Banque import Banque
 
 color_factory_giant = CallbackData("cl_giant", "color_giant")
 

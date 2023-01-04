@@ -5,7 +5,7 @@ from os import getenv
 
 from aiogram import types, Bot, Dispatcher
 
-from tgbot.bot.Banque import Banque
+from bot.Banque import Banque
 
 bot = Bot(getenv("token"))
 dp = Dispatcher(bot)

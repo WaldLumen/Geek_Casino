@@ -4,11 +4,11 @@ from asyncio import sleep
 from aiogram import types
 from aiogram.utils.callback_data import CallbackData
 
-from tgbot.bot.Banque import Banque
+from bot.Banque import Banque
 
 color_factory_classic = CallbackData("cl_classic", "color_classic")
 
-colors = [' ⚪ White⚪  ', 'Black', 'Red']
+colors = ['White', 'Black', 'Red']
 
 
 async def start_game_classic(call: types.CallbackQuery):
